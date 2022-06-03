@@ -8,7 +8,6 @@ import (
 	"go-rest/models"
 	"log"
 	"net/http"
-	"strconv"
 )
 
 func Home(w http.ResponseWriter, r *http.Request) {
@@ -28,9 +27,7 @@ func GetPersonality(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	id := vars["id"]
 
-	for _, personality := range models.Personalities {
-		if strconv.Itoa(personality.Id) == id {
-			json.NewEncoder(w).Encode(personality)
-		}
-	}
+	var personality models.Personalidade
+	database.DB.First(&personality, id)
+	json.NewEncoder(w).Encode(personality)
 }
