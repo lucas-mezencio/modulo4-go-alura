@@ -15,7 +15,6 @@ func Home(w http.ResponseWriter, r *http.Request) {
 }
 
 func GetAllPersonalities(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Content-Type", "application/json")
 	var p []models.Personalidade
 	database.DB.Find(&p)
 	err := json.NewEncoder(w).Encode(p)
